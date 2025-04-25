@@ -6,15 +6,15 @@ Current Features:
 
 🧮 Basic calculator (arithmetic operations)
 
-Planned Updates:
+*Planned Updates:*
 
-📌 New utility modules
+> 📌 New utility modules
 
-🔄 Code refactoring & optimization
+> 🔄 Code refactoring & optimization
 
-📚 Documentation
+> 📚 Documentation
 
-Contributions are welcome! ✨
+*Contributions are welcome! ✨*
 
 (Repository will be updated as the project evolves.)
 
