@@ -11,7 +11,7 @@ Current Features:
 
 > 📌 New utility modules
   - Converter
-    - [ ] Distance
+    - [x] Distance
     - [ ] Weight
     - [ ] Temperature   
 
