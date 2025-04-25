@@ -5,10 +5,15 @@ A collection of utilities in C, starting with a simple calculator. The project w
 Current Features:
 
 🧮 Basic calculator (arithmetic operations)
+🧮 Distance converter
 
 *Planned Updates:*
 
 > 📌 New utility modules
+  - Converter
+    - [ ] Distance
+    - [ ] Weight
+    - [ ] Temperature   
 
 > 🔄 Code refactoring & optimization
 
