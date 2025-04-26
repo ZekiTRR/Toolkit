@@ -8,12 +8,14 @@ Current Features:
 
 🧮 Distance converter
 
+🧮 Weight converter
+
 *Planned Updates:*
 
 > 📌 New utility modules
   - Converter
     - [x] Distance
-    - [ ] Weight
+    - [x] Weight
     - [ ] Temperature   
 
 > 🔄 Code refactoring & optimization
