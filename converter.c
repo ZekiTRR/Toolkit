@@ -2,53 +2,112 @@
 #include <ctype.h>
 
 /*
-Converters:
-    Distance:
+Conversion Factors for the Converters:
 
- * - Inch (in): 1 m ≈ 39.37007874 inches.
- * - Mil (mil): 1 mil = 1/1000 of an inch. Thus, 1 m ≈ 39.37007874 * 1000 mil.
- * - Meter (m): The base unit (value remains unchanged).
- * - Kilometer (km): 1 km = 1000 m.
- * - Foot (ft): 1 m ≈ 3.280839895 feet.
- * - Yard (yd): 1 m ≈ 1.093613298 yards.
-    Base -> meters
+Distance Converter:
+    - Inch (in): 1 inch = 0.0254 meter.
+                 Therefore, 1 meter ≈ 39.37007874 inches.
+    - Mil (mil): 1 mil = 1/1000 of an inch.
+                 Therefore, 1 meter ≈ 39.37007874 * 1000 mil.
+    - Meter (m): The base unit; no conversion needed.
+    - Kilometer (km): 1 kilometer = 1000 meters.
+    - Foot (ft): 1 foot = 0.3048 meter.
+                Therefore, 1 meter ≈ 3.280839895 feet.
+    - Yard (yd): 1 yard = 0.9144 meter.
+                Therefore, 1 meter ≈ 1.093613298 yards.
+
+Weight Converter:
+    - Milligram (mg): 1 milligram = 0.001 gram.
+    - Gram (g): The base unit; no conversion needed.
+    - Kilogram (kg): 1 kilogram = 1000 grams.
+    - Ton (t): 1 ton = 1,000,000 grams.
+    - Centner (cen): 1 centner = 100,000 grams.
+    - Karat (k): 1 karat = 0.2 gram.
+    - British Pound (lb): 1 British pound ≈ 453.59 grams.
 */
 
+/* Function Prototypes */
+ 
+void distance_converter(); 
+void weight_converter();
 
+/* Main Hub Function
+ *
+ * This function displays a menu for the available converters and calls
+ * the corresponding conversion function based on user selection.
+ */
 void hub()
 {
+    int hub_converter = 0;  // Variable to store the user's conversion type selection
+
     printf("%s\n", "Converter Hello!");
     printf("%s\n", "1. Distance converter");
-    printf("%s\n", "2. Mass converter");
+    printf("%s\n", "2. Weight converter");
     printf("%s\n", "3. Temperature converter");
+    
+    // Read user's choice for the conversion type.
+    scanf("%i", &hub_converter);
+
+    /*
+       User Selection Mapping:
+         1 -> Distance conversion
+         2 -> Weight conversion
+         3 -> Temperature conversion (currently not implemented)
+    */
+    switch(hub_converter) {
+        case 1:
+            distance_converter();
+            break;
+        case 2:
+            weight_converter();
+            break;
+        default:
+            // If the user's input does not match any case, print an error message.
+            printf("%s\n\n\n", "Error expression!");
+            break;
+    }
 }
 
-void distance_converter() {
-    int src_unit = 0;         // Variable to store the source unit option
-    int tgt_unit = 0;         // Variable to store the target unit option
-    double value = 0.0;       // The value in the source unit entered by the user
-    double value_in_meters = 0.0;   // Intermediate value converted to meters
+/*
+ * Function: distance_converter
+ * Description:
+ *   This function performs the conversion between various distance units.
+ *   It follows these steps:
+ *     1. Prompts the user to select a source unit from a predefined list.
+ *     2. Reads the numeric value in the source unit.
+ *     3. Prompts the user to select a target unit from the same list.
+ *     4. Converts the given value first to meters (the base unit), then from meters
+ *        to the target unit using an array of conversion factors.
+ *     5. Displays the final converted value.
+ */
+void distance_converter() 
+{ 
+    int src_unit = 0;         // Stores the source unit option number
+    int tgt_unit = 0;         // Stores the target unit option number
+    double value = 0.0;       // Value in the source unit as entered by the user
+    double value_in_meters = 0.0;   // Intermediate value converted to meters (base unit)
     double result = 0.0;      // Final conversion result in the target unit
 
-    // Conversion factors to convert each unit to meters.
-    // Using an array where index mapping is as follows:
-    // Index 1: Inch  => 1 inch = 0.0254 meter
-    // Index 2: Mil   => 1 mil  = 0.0254 / 1000 = 0.0000254 meter
-    // Index 3: Meter => 1 meter = 1.0 meter
-    // Index 4: Kilometer => 1 kilometer = 1000 meters
-    // Index 5: Foot  => 1 foot = 0.3048 meter
-    // Index 6: Yard  => 1 yard = 0.9144 meter
+    // Array of conversion factors from each unit to meters.
+    // Mapping of indices:
+    //   0: Placeholder
+    //   1: Inch      -> 1 inch = 0.0254 meter
+    //   2: Mil       -> 1 mil  = 0.0000254 meter (i.e., 1/1000 of an inch)
+    //   3: Meter     -> 1 meter = 1.0 meter (base unit)
+    //   4: Kilometer -> 1 kilometer = 1000 meters
+    //   5: Foot      -> 1 foot = 0.3048 meter
+    //   6: Yard      -> 1 yard = 0.9144 meter
     double factors[] = { 
         0.0,        // Placeholder for index 0
         0.0254,     // Inch to meter
         0.0000254,  // Mil to meter
-        1.0,        // Meter to meter
+        1.0,        // Meter (base unit)
         1000.0,     // Kilometer to meter
         0.3048,     // Foot to meter
         0.9144      // Yard to meter
     };
 
-    // Print source unit options
+    // Display source unit options.
     printf("Select the source unit:\n");
     printf("1. Inch (in)\n");
     printf("2. Mil (mil)   // 1 mil = 1/1000 inch\n");
@@ -57,20 +116,21 @@ void distance_converter() {
     printf("5. Foot (ft)\n");
     printf("6. Yard (yd)\n");
 
-    // Get user input for the source unit
+    // Prompt for the source unit selection.
     printf("Enter the number corresponding to the source unit: ");
     scanf("%d", &src_unit);
 
+    // Validate that the source unit is within the valid range.
     if (src_unit < 1 || src_unit > 6) {
         printf("Invalid source unit selection.\n");
         return;
     }
 
-    // Get the value in the source unit from the user
+    // Prompt the user to enter the value in the selected source unit.
     printf("Enter the value in the source unit: ");
     scanf("%lf", &value);
 
-    // Print target unit options
+    // Display target unit options.
     printf("\nSelect the target unit:\n");
     printf("1. Inch (in)\n");
     printf("2. Mil (mil)\n");
@@ -79,22 +139,88 @@ void distance_converter() {
     printf("5. Foot (ft)\n");
     printf("6. Yard (yd)\n");
 
-    // Get user input for the target unit
+    // Prompt for the target unit selection.
     printf("Enter the number corresponding to the target unit: ");
     scanf("%d", &tgt_unit);
 
+    // Validate that the target unit is within the valid range.
     if (tgt_unit < 1 || tgt_unit > 6) {
         printf("Invalid target unit selection.\n\n\n");
         return;
     }
 
-    // Convert the value in the source unit to meters
+    // Convert the input value to the base unit (meters).
     value_in_meters = value * factors[src_unit];
 
-    // Convert the value in meters to the target unit
+    // Convert the intermediate value in meters to the target unit.
     result = value_in_meters / factors[tgt_unit];
 
-    // Display the result, showing the conversion from the source value to the target unit
+    // Display the final conversion result.
     printf("%.6lf\n\n\n", result);
+}
 
+/*
+ * Function: weight_converter
+ * Description:
+ *   This function is intended for weight unit conversion.
+ *   It defines an array of conversion factors to convert various weight units to the
+ *   base unit (grams). The mapping in the array is as follows:
+ *      index 0: Placeholder
+ *      index 1: Milligram -> 1 mg = 0.001 gram
+ *      index 2: Kilogram  -> 1 kg = 1000 grams
+ *      index 3: Ton       -> 1 ton = 1,000,000 grams
+ *      index 4: Centner   -> 1 centner = 100,000 grams
+ *      index 5: Karat     -> 1 karat = 0.2 gram
+ *      index 6: British Pound -> 1 British pound ≈ 453.59 grams
+ *
+ *   Note: This function is currently a placeholder and only prints a test message.
+ */
+void weight_converter()
+{
+    int src_unit = 0;
+    int tgt_unit = 0;
+    double value = 0.0;       // Value in the source unit as entered by the user
+    double value_in_grams  = 0.0;   // Intermediate value converted to grams (base unit)
+    double result = 0.0;      // Final conversion result in the target unit
+
+
+    double weight_factors[] = {
+        0.0,      // Placeholder for index 0
+        0.001,    // Milligram to gram
+        1000,     // Kilogram to gram
+        1000000,  // Ton to gram
+        100000,   // Centner to gram
+        0.2,      // Karat to gram
+        453.59    // British Pound to gram
+    };
+
+    // Future implementation will handle:
+    //   - Prompting the user to select source and target weight units.
+    //   - Reading the weight value and performing the conversion using weight_factors.
+//    printf("%s\n", "Test");
+    system("cls");
+    printf("Enter the weight unit and quantity (e.g., 'kg 50' for 50 kilograms). Available units:\n"
+    "1. Milligram (mg): 1 milligram = 0.001 gram\n"
+   // "2. Gram (g): The base unit; no conversion needed\n"
+    "2. Kilogram (kg): 1 kilogram = 1000 grams\n"
+    "3. Ton (t): 1 ton = 1,000,000 grams\n"
+    "4. Centner (cen): 1 centner = 100,000 grams\n"
+    "5. Karat (k): 1 karat = 0.2 gram\n"
+    "6. British Pound (lb): 1 British pound ?= 453.59 grams\n");
+
+    scanf("%d", &src_unit);
+
+    printf("%s\n", "Enter the value: ");
+    scanf("%lf", &value);
+
+
+    printf("%s", "Enter the target unit: ");
+    scanf("%d", &tgt_unit);
+    
+    // printf("%s%d%d%d\n","The src,value,tgt: " ,src_unit,value,tgt_unit);
+
+    value_in_grams = value *  weight_factors[src_unit];
+    // printf("%.2f\n", value_in_grams);
+    result = value_in_grams / weight_factors[tgt_unit];
+     printf("%.6lf\n\n\n", result);
 }

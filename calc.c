@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <math.h>
+
+double sqrts();
 void calc()
 {
     int ac;
@@ -15,6 +18,7 @@ void calc()
     while((ac = getchar()) != '\n' && ac != EOF);   
     printf("%s", "Enter the action: ");
     scanf("%c",&var);
+    
     // printf("%c\n", var);
 
     while((ac = getchar()) != '\n' && ac != EOF);   
@@ -26,21 +30,15 @@ void calc()
     {
     case '+':
        res = a + b;
-      printf("%.2f\n", res);
-      printf("\n");
-      printf("\n");
+      printf("%.2f\n\n\n", res);
         break;
     case '-':
      res = a - b;
-      printf("%.2f\n", res);
-      printf("\n");
-      printf("\n");
+      printf("%.2f\n\n\n", res);
     break;
     case '*':
     res = a * b;
-      printf("%.2f\n", res);
-      printf("\n");
-      printf("\n");
+      printf("%.2f\n\n\n", res);
      break;
     case '/':
     res = a / b;
@@ -50,15 +48,18 @@ void calc()
       }else{
 
      
-      printf("%.2f\n", res);
-      printf("\n");
-      printf("\n");
+      printf("%.2f\n\n\n", res);
      break;
-      } 
-    default:
+      }
+
+        default:
         printf("%s\n", "Error expression!");
         break;
     }
 }
 
 
+double sqrts(){
+  double a = 0;
+  return sqrt(a);
+}

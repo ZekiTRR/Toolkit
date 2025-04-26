@@ -23,7 +23,7 @@ void choose()
         break;
         case 2:
             system("cls");
-            distance_converter();
+            hub();
         break;
         case 0:
         system("exit");
