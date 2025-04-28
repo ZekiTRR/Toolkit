@@ -30,6 +30,7 @@ Weight Converter:
  
 void distance_converter(); 
 void weight_converter();
+void temperature_converter();
 
 /* Main Hub Function
  *
@@ -60,6 +61,9 @@ void hub()
             break;
         case 2:
             weight_converter();
+            break;
+        case 3:
+            temperature_converter();
             break;
         default:
             // If the user's input does not match any case, print an error message.
@@ -223,4 +227,99 @@ void weight_converter()
     // printf("%.2f\n", value_in_grams);
     result = value_in_grams / weight_factors[tgt_unit];
      printf("%.6lf\n\n\n", result);
+}
+
+
+/*
+ * Function: temperature_converter
+ * Description:
+ *   This function converts temperatures between three popular units:
+ *     1. Celsius (°C)
+ *     2. Fahrenheit (°F)
+ *     3. Kelvin (K)
+ *
+ *   Steps:
+ *     1. Prompts the user to select a source temperature unit.
+ *     2. Reads the temperature value in the chosen source unit.
+ *     3. Prompts the user to select a target temperature unit.
+ *     4. Converts the input value first to Celsius (the base unit), then from Celsius
+ *        to the target unit using standard formulas.
+ *     5. Displays the final converted temperature.
+ */
+void temperature_converter() 
+{
+    int src_unit = 0;             // Stores the selected source temperature unit
+    int tgt_unit = 0;             // Stores the selected target temperature unit
+    double value = 0.0;           // Temperature value in the source unit
+    double result = 0.0;          // Final conversion result in the target unit
+    double value_in_celsius = 0.0; // Intermediate temperature in Celsius (base unit)
+
+    // Display source temperature unit options.
+    printf("Select the source temperature unit:\n");
+    printf("1. Celsius (oC)\n");
+    printf("2. Fahrenheit (oF)\n");
+    printf("3. Kelvin (K)\n");
+
+    // Prompt for the source unit selection.
+    printf("Enter the number corresponding to the source unit: ");
+    scanf("%d", &src_unit);
+
+    // Validate the source unit selection.
+    if (src_unit < 1 || src_unit > 3) 
+    {
+        printf("Invalid source temperature unit selection.\n");
+        return;
+    }
+
+    // Prompt the user to enter the temperature value.
+    printf("Enter the temperature value: ");
+    scanf("%lf", &value);
+
+    // Display target temperature unit options.
+    printf("\nSelect the target temperature unit:\n");
+    printf("1. Celsius (oC)\n");
+    printf("2. Fahrenheit (oF)\n");
+    printf("3. Kelvin (K)\n");
+
+    // Prompt for the target unit selection.
+    printf("Enter the number corresponding to the target unit: ");
+    scanf("%d", &tgt_unit);
+
+    // Validate the target unit selection.
+    if (tgt_unit < 1 || tgt_unit > 3) 
+    {
+        printf("Invalid target temperature unit selection.\n");
+        return;
+    }
+
+    // Convert the input temperature to Celsius (base unit).
+    switch (src_unit) 
+    {
+        case 1: // Celsius (°C)
+            value_in_celsius = value;
+            break;
+        case 2: // Fahrenheit (°F) to Celsius: C = (F - 32) * 5/9
+            value_in_celsius = (value - 32.0) * (5.0 / 9.0);
+            break;
+        case 3: // Kelvin (K) to Celsius: C = K - 273.15
+            value_in_celsius = value - 273.15;
+            break;
+    }
+
+    // Convert the Celsius value to the target temperature unit.
+    switch (tgt_unit) 
+    {
+        case 1: // Celsius (°C)
+            result = value_in_celsius;
+            break;
+        case 2: // Fahrenheit (°F): F = C * 9/5 + 32
+            result = value_in_celsius * (9.0 / 5.0) + 32.0;
+            break;
+        case 3: // Kelvin (K): K = C + 273.15
+            result = value_in_celsius + 273.15;
+            break;
+    }
+
+    // Display the final conversion result.
+    printf("Converted temperature: %.2lf\n\n", result);
 }

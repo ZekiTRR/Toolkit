@@ -8,8 +8,8 @@ int a = 0;
 void choose()
 {
     printf("%s\n", "Welcome to toolkit, choose the tool: ");
-    printf("%s\n", "    1.Calculator");
-    printf("%s\n", "    2.Converter (Distance)");
+    printf("%s\n", "    1.Calculator (+, -, *, /)");
+    printf("%s\n", "    2.Converter (Distance, Weight, Temperature)");
     printf("%s\n", "    0.Exit");
     scanf("%d",&a);
     // printf("%s\n", "Welcome to toolkit, choose the tool: ");
