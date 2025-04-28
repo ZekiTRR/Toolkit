@@ -10,6 +10,8 @@ Current Features:
 
 🧮 Weight converter
 
+🧮 Temperature converter
+
 *Planned Updates:*
 
 > 📌 New utility modules
