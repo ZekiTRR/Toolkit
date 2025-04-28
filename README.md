@@ -16,7 +16,7 @@ Current Features:
   - Converter
     - [x] Distance
     - [x] Weight
-    - [ ] Temperature   
+    - [x] Temperature   
 
 > 🔄 Code refactoring & optimization
 
