@@ -8,21 +8,19 @@ int a = 0;
 void choose()
 {
     printf("%s\n", "Welcome to toolkit, choose the tool: ");
-    printf("%s\n", "    1.Calculator (+, -, *, /)");
-    printf("%s\n", "    2.Converter (Distance, Weight, Temperature)");
+    printf("%s\n", "    1.Calculator (+, -, *, /, // for root, ** for power)");
+    printf("%s\n", "    2.Converter (Distance, Weight, Temperature, Data)");
     printf("%s\n", "    0.Exit");
     scanf("%d",&a);
-    // printf("%s\n", "Welcome to toolkit, choose the tool: ");
 
-    // printf("%s\n", "Welcome to toolkit, choose the tool: ");
 
     switch(a){
         case 1:
-            system("cls");
+            system("cls || clear");
             calc();
         break;
         case 2:
-            system("cls");
+            system("cls || clear");
             hub();
         break;
         case 0:

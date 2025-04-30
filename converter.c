@@ -1,36 +1,12 @@
 #include <stdio.h>
 #include <ctype.h>
 
-/*
-Conversion Factors for the Converters:
-
-Distance Converter:
-    - Inch (in): 1 inch = 0.0254 meter.
-                 Therefore, 1 meter ≈ 39.37007874 inches.
-    - Mil (mil): 1 mil = 1/1000 of an inch.
-                 Therefore, 1 meter ≈ 39.37007874 * 1000 mil.
-    - Meter (m): The base unit; no conversion needed.
-    - Kilometer (km): 1 kilometer = 1000 meters.
-    - Foot (ft): 1 foot = 0.3048 meter.
-                Therefore, 1 meter ≈ 3.280839895 feet.
-    - Yard (yd): 1 yard = 0.9144 meter.
-                Therefore, 1 meter ≈ 1.093613298 yards.
-
-Weight Converter:
-    - Milligram (mg): 1 milligram = 0.001 gram.
-    - Gram (g): The base unit; no conversion needed.
-    - Kilogram (kg): 1 kilogram = 1000 grams.
-    - Ton (t): 1 ton = 1,000,000 grams.
-    - Centner (cen): 1 centner = 100,000 grams.
-    - Karat (k): 1 karat = 0.2 gram.
-    - British Pound (lb): 1 British pound ≈ 453.59 grams.
-*/
-
 /* Function Prototypes */
  
 void distance_converter(); 
 void weight_converter();
 void temperature_converter();
+void data_storage_converter(); 
 
 /* Main Hub Function
  *
@@ -45,6 +21,7 @@ void hub()
     printf("%s\n", "1. Distance converter");
     printf("%s\n", "2. Weight converter");
     printf("%s\n", "3. Temperature converter");
+    printf("%s\n", "4. Data storage converter");
     
     // Read user's choice for the conversion type.
     scanf("%i", &hub_converter);
@@ -57,16 +34,24 @@ void hub()
     */
     switch(hub_converter) {
         case 1:
+            system("cls || clear");
             distance_converter();
             break;
         case 2:
+            system("cls || clear");
             weight_converter();
             break;
         case 3:
+            system("cls || clear");
             temperature_converter();
+            break;
+        case 4:
+            system("cls || clear");
+            data_storage_converter();
             break;
         default:
             // If the user's input does not match any case, print an error message.
+            system("cls || clear");
             printf("%s\n\n\n", "Error expression!");
             break;
     }
@@ -202,7 +187,6 @@ void weight_converter()
     //   - Prompting the user to select source and target weight units.
     //   - Reading the weight value and performing the conversion using weight_factors.
 //    printf("%s\n", "Test");
-    system("cls");
     printf("Enter the weight unit and quantity (e.g., 'kg 50' for 50 kilograms). Available units:\n"
     "1. Milligram (mg): 1 milligram = 0.001 gram\n"
    // "2. Gram (g): The base unit; no conversion needed\n"
@@ -226,7 +210,8 @@ void weight_converter()
     value_in_grams = value *  weight_factors[src_unit];
     // printf("%.2f\n", value_in_grams);
     result = value_in_grams / weight_factors[tgt_unit];
-     printf("%.6lf\n\n\n", result);
+    printf("%.6lf\n\n\n", result);
+
 }
 
 
@@ -322,4 +307,99 @@ void temperature_converter()
 
     // Display the final conversion result.
     printf("Converted temperature: %.2lf\n\n", result);
+}
+
+void data_storage_converter() 
+{
+    int src_unit = 0;             // Stores the selected source unit
+    int tgt_unit = 0;             // Stores the selected target unit
+    double value = 0.0;           // Input value in source unit
+    double result = 0.0;          // Final result in target unit
+    double value_in_bytes = 0.0;  // Intermediate value in Bytes (base unit)
+
+    // Display source unit options
+    printf("Select the source storage unit:\n");
+    printf("1. Bytes (B)\n");
+    printf("2. Kilobytes (KB)\n");
+    printf("3. Megabytes (MB)\n");
+    printf("4. Gigabytes (GB)\n");
+    printf("5. Terabytes (TB)\n");
+
+    // Prompt for source unit selection
+    printf("Enter the number corresponding to the source unit: ");
+    scanf("%d", &src_unit);
+
+    // Validate source unit
+    if (src_unit < 1 || src_unit > 5) 
+    {
+        printf("Invalid source storage unit selection.\n");
+        return;
+    }
+
+    // Prompt for the storage value
+    printf("Enter the storage value: ");
+    scanf("%lf", &value);
+
+    // Display target unit options
+    printf("\nSelect the target storage unit:\n");
+    printf("1. Bytes (B)\n");
+    printf("2. Kilobytes (KB)\n");
+    printf("3. Megabytes (MB)\n");
+    printf("4. Gigabytes (GB)\n");
+    printf("5. Terabytes (TB)\n");
+
+    // Prompt for target unit selection
+    printf("Enter the number corresponding to the target unit: ");
+    scanf("%d", &tgt_unit);
+
+    // Validate target unit
+    if (tgt_unit < 1 || tgt_unit > 5) 
+    {
+        printf("Invalid target storage unit selection.\n");
+        return;
+    }
+
+    // Convert source unit to Bytes (base unit)
+    switch (src_unit) 
+    {
+        case 1: // Bytes (B)
+            value_in_bytes = value;
+            break;
+        case 2: // Kilobytes (KB) to Bytes
+            value_in_bytes = value * 1024.0;
+            break;
+        case 3: // Megabytes (MB) to Bytes
+            value_in_bytes = value * 1024.0 * 1024.0;
+            break;
+        case 4: // Gigabytes (GB) to Bytes
+            value_in_bytes = value * 1024.0 * 1024.0 * 1024.0;
+            break;
+        case 5: // Terabytes (TB) to Bytes
+            value_in_bytes = value * 1024.0 * 1024.0 * 1024.0 * 1024.0;
+            break;
+    }
+
+    // Convert Bytes to target unit
+    switch (tgt_unit) 
+    {
+        case 1: // Bytes (B)
+            result = value_in_bytes;
+            break;
+        case 2: // Bytes to Kilobytes (KB)
+            result = value_in_bytes / 1024.0;
+            break;
+        case 3: // Bytes to Megabytes (MB)
+            result = value_in_bytes / (1024.0 * 1024.0);
+            break;
+        case 4: // Bytes to Gigabytes (GB)
+            result = value_in_bytes / (1024.0 * 1024.0 * 1024.0);
+            break;
+        case 5: // Bytes to Terabytes (TB)
+            result = value_in_bytes / (1024.0 * 1024.0 * 1024.0 * 1024.0);
+            break;
+    }
+
+    // Display the final conversion result
+    system("cls || clear");
+    printf("Converted storage: %.2lf\n\n", result);
 }
