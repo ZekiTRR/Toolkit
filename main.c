@@ -7,12 +7,13 @@
 int a = 0;
 void choose()
 {
+ 
+    
     printf("%s\n", "Welcome to toolkit, choose the tool: ");
     printf("%s\n", "    1.Calculator (+, -, *, /, // for root, ** for power)");
-    printf("%s\n", "    2.Converter (Distance, Weight, Temperature, Data)");
+    printf("%s\n", "    2.Converter (Distance, Weight, Temperature, Data, Password, Speed)");
     printf("%s\n", "    0.Exit");
     scanf("%d",&a);
-
 
     switch(a){
         case 1:

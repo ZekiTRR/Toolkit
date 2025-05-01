@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
+#include <time.h>
+
+// #pragma comment(lib , "winhttp.lib")
 
 /* Function Prototypes */
  
@@ -7,6 +11,10 @@ void distance_converter();
 void weight_converter();
 void temperature_converter();
 void data_storage_converter(); 
+void password_generator();
+void speed_converter();
+
+
 
 /* Main Hub Function
  *
@@ -22,7 +30,9 @@ void hub()
     printf("%s\n", "2. Weight converter");
     printf("%s\n", "3. Temperature converter");
     printf("%s\n", "4. Data storage converter");
-    
+    printf("%s\n", "5. Password generator");
+    printf("%s\n", "6. Speed converter");
+    // printf("%s\n", "6. Currency converter");
     // Read user's choice for the conversion type.
     scanf("%i", &hub_converter);
 
@@ -49,6 +59,14 @@ void hub()
             system("cls || clear");
             data_storage_converter();
             break;
+        case 5:
+            system("cls || clear");
+            password_generator();
+        case 6:
+            system("cls || clear");
+            speed_converter();
+            break;
+              
         default:
             // If the user's input does not match any case, print an error message.
             system("cls || clear");
@@ -402,4 +420,133 @@ void data_storage_converter()
     // Display the final conversion result
     system("cls || clear");
     printf("Converted storage: %.2lf\n\n", result);
+}
+
+/*
+ * Function: password_generator
+ * Description:
+ *   Generates a random lowercase letter password of a length specified by the user.
+ *   Steps:
+ *     1. Prompts the user to enter the length of the password.
+ *     2. Generates a random password of the specified length using lowercase letters.
+ *     3. Prints the generated password.
+ */
+void password_generator()
+{
+    int length = 0;
+    printf("%s", "Enter the length of the password: ");
+    scanf("%d", &length);
+    char password[length + 1];
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        password[i] = rand() % 26 + 'a';
+    }
+    password[i] = '\0';
+    printf("Generated password: %s\n\n", password);
+}
+
+
+/*
+ * Function: speed_converter
+ * Description:
+ *   This function converts speeds between four popular units:
+ *     1. Meters per second (m/s)
+ *     2. Kilometers per hour (km/h)
+ *     3. Miles per hour (mph)
+ *     4. Knots (knots)
+ *
+ *   Steps:
+ *     1. Prompts the user to select a source speed unit.
+ *     2. Reads the speed value in the chosen source unit.
+ *     3. Prompts the user to select a target speed unit.
+ *     4. Converts the input value first to meters per second (base unit),
+ *        then from meters per second to the target unit using standard formulas.
+ *     5. Displays the final converted speed.
+ */
+
+void speed_converter() 
+{
+    int src_unit = 0;          // Stores the selected source speed unit
+    int tgt_unit = 0;          // Stores the selected target speed unit
+    double value = 0.0;        // Speed value in the source unit
+    double result = 0.0;       // Final conversion result in target unit
+    double value_in_mps = 0.0; // Intermediate speed in meters per second (base unit)
+
+    // Display source speed unit options
+    printf("Select the source speed unit:\n");
+    printf("1. Meters per second (m/s)\n");
+    printf("2. Kilometers per hour (km/h)\n");
+    printf("3. Miles per hour (mph)\n");
+    printf("4. Knots (knots)\n");
+
+    // Prompt for source unit selection
+    printf("Enter the number corresponding to the source unit (1-4): ");
+    scanf("%d", &src_unit);
+
+    // Validate source unit selection
+    if (src_unit < 1 || src_unit > 4) 
+    {
+        printf("Invalid source speed unit selection.\n");
+        return;
+    }
+
+    // Get speed value input
+    printf("Enter the speed value: ");
+    scanf("%lf", &value);
+
+    // Display target speed unit options
+    printf("\nSelect the target speed unit:\n");
+    printf("1. Meters per second (m/s)\n");
+    printf("2. Kilometers per hour (km/h)\n");
+    printf("3. Miles per hour (mph)\n");
+    printf("4. Knots (knots)\n");
+
+    // Prompt for target unit selection
+    printf("Enter the number corresponding to the target unit (1-4): ");
+    scanf("%d", &tgt_unit);
+
+    // Validate target unit selection
+    if (tgt_unit < 1 || tgt_unit > 4) 
+    {
+        printf("Invalid target speed unit selection.\n");
+        return;
+    }
+
+    // Convert source unit to meters per second (base unit)
+    switch (src_unit) 
+    {
+        case 1: // m/s (already base unit)
+            value_in_mps = value;
+            break;
+        case 2: // km/h to m/s: divide by 3.6
+            value_in_mps = value / 3.6;
+            break;
+        case 3: // mph to m/s: multiply by 0.44704
+            value_in_mps = value * 0.44704;
+            break;
+        case 4: // knots to m/s: multiply by 0.514444
+            value_in_mps = value * 0.514444;
+            break;
+    }
+
+    // Convert from meters per second to target unit
+    switch (tgt_unit) 
+    {
+        case 1: // m/s (base unit)
+            result = value_in_mps;
+            break;
+        case 2: // m/s to km/h: multiply by 3.6
+            result = value_in_mps * 3.6;
+            break;
+        case 3: // m/s to mph: divide by 0.44704
+            result = value_in_mps / 0.44704;
+            break;
+        case 4: // m/s to knots: divide by 0.514444
+            result = value_in_mps / 0.514444;
+            break;
+    }
+
+    // Display conversion result with 2 decimal places
+    printf("Converted speed: %.2lf\n\n", result);
 }
