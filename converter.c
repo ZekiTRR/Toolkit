@@ -62,6 +62,7 @@ void hub()
         case 5:
             system("cls || clear");
             password_generator();
+            break;
         case 6:
             system("cls || clear");
             speed_converter();
