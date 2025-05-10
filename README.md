@@ -1,15 +1,18 @@
 **C Toolkit 🛠️**
 
-A collection of utilities in C, starting with a simple calculator. The project will grow over time, with plans to add more tools.
+A collection of utilities , starting with a simple calculator. The project will grow over time, with plans to add more tools.
 
 **Current Features:**
 
 - 📱 Basic calculator (arithmetic operations)
+  - 💿 Discriminant solution
 - 📏 Distance converter
 - 🏋️‍♀️ Weight converter
 - 🌡 Temperature converter
 - 🚀 Speed converter (добавлено, так как в Planned Updates он отмечен [x])
 - 🔐 Password generator (вынесено из раздела конвертеров)
+- ⌛ Timer
+- ⌛ Stopwatch
 
 **Planned Updates:**
 
@@ -23,7 +26,7 @@ A collection of utilities in C, starting with a simple calculator. The project w
     - [x] Password generator (перенесено в отдельную категорию) 
 
 > 🖥️ GUI
-  - [ ] GUI (maybe in Python)
+  - [ ] GUI (maybe in Python || Qt || Imgui)
 
 > 🔄 Code refactoring & optimization
 > 📚 Documentation
