@@ -4,7 +4,7 @@ int a = 0;
 void choose()
 {
  
-    
+// The code has been updated from C to C++, so the C++ file has a C style    
     printf("%s\n", "Welcome to toolkit, choose the tool: ");
     printf("%s\n", "    1.Calculator (+, -, *, /, // for root, ** for power)");
     printf("%s\n", "    2.Converter (Distance, Weight, Temperature, Data, Password, Speed)");
