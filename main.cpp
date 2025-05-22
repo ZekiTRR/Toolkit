@@ -1,5 +1,5 @@
 #include "includes.h"
-
+// The code has been updated from C to C++, so the C++ file has a C style
 int a = 0;
 void choose()
 {

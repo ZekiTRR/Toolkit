@@ -122,3 +122,20 @@ void solveQuadratic()
     cout << endl << endl;
 }
 
+// Function to solve linear equations (ax + b = 0)
+void solveLinear()
+{
+    float a,b;
+    cout << "Enter the coefficient of a: ";
+    cin >> a;
+    cout << "Enter the coefficient of b: ";
+    cin >> b;
+
+    if (a == 0) {
+        cout << "Coefficient 'a' cannot be zero in a linear equation." << endl;
+        return;
+    }
+    
+    float x = -b / a;
+    cout << "The solution is: x = " << x << endl;
+}
